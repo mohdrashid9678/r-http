@@ -1,5 +1,5 @@
 // Package httpserver provides a high-performance, extensible HTTP server library.
-package httpserver
+package rhttp
 
 import (
 	"log"
@@ -12,7 +12,7 @@ import (
 	"github.com/mohdrashid9678/rhttp/router"
 )
 
-// Server is the core of our HTTP server.
+// Server is the core for serving http requests.
 type Server struct {
 	addr   string
 	router *router.Router
