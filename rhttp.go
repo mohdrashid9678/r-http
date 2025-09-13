@@ -1,4 +1,3 @@
-// Package httpserver provides a high-performance, extensible HTTP server library.
 package rhttp
 
 import (
