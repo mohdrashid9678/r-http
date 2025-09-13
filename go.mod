@@ -1,4 +1,4 @@
-module github.com/mohdrashid9678/r-http
+module github.com/mohdrashid9678/rhttp
 
 go 1.23.4
 
