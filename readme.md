@@ -70,9 +70,55 @@ This makes it great for:
 go get github.com/mohdrashid9678/rhttp
 ```
 
+```bash
+go get github.com/mohdrashid9678/rhttp/request
+```
+
+```bash
+go get github.com/mohdrashid9678/rhttp/response
+```
+
+```bash
+go get github.com/mohdrashid9678/rhttp/httperrors
+```
+
 ---
 
 ## Quick Start
+
+### Start a Minimal Server
+
+```go
+package main
+
+import (
+	"log"
+
+	"github.com/mohdrashid9678/rhttp"
+	"github.com/mohdrashid9678/rhttp/request"
+	"github.com/mohdrashid9678/rhttp/response"
+)
+
+func main() {
+	// 1. Create a new server instance
+	server := rhttp.New(":8080")
+
+	// 2. Register a handler for the home page
+	server.AddRoute("GET", "/", handleHomePage)
+
+	// 3. Start the server.
+	log.Println("Starting server on http://localhost:8080")
+	if err := server.ListenAndServe(); err != nil {
+		log.Fatalf("Failed to start server: %v", err)
+	}
+}
+
+// handleHomePage is the handler for the "/" route.
+func handleHomePage(req *request.Request) (*response.Response, error) {
+	log.Printf("Serving request for target: %s", req.Target)
+	return response.Text(200, "Welcome to the home page!")
+}
+```
 
 ### Parse a Request
 
@@ -129,45 +175,6 @@ func main() {
     }
 
     log.Printf("raw response:\n%s", buf.String())
-}
-```
-
-### Assemble a Minimal Server
-
-```go
-package main
-
-import (
-	"log"
-
-	"github.com/mohdrashid9678/rhttp"
-	"github.com/mohdrashid9678/rhttp/request"
-	"github.com/mohdrashid9678/rhttp/response"
-	"github.com/mohdrashid9678/rhttp/router"
-)
-
-// handleHomePage is the handler function for the "/" route.
-// It follows the router.Handler signature.
-func handleHomePage(req *request.Request) *response.Response {
-	log.Printf("Serving request for target: %s", req.Target)
-	return response.Text(200, "Welcome to the home page!")
-}
-
-func main() {
-	// 1. Create a new router instance
-	r := router.New()
-
-	// 2. Register a handler for the home page.
-	r.AddRoute("GET", "/", handleHomePage)
-
-	// 3. Create a new server instance from your library,
-	server := rhttp.NewServer(r)
-
-	// 4. Start the server and listen for connections on port 8080.
-	log.Println("Starting server on http://localhost:8080")
-	if err := server.ListenAndServe(":8080"); err != nil {
-		log.Fatalf("Failed to start server: %v", err)
-	}
 }
 ```
 
