@@ -22,9 +22,9 @@ This project aims to provide both a working server and an educational foundation
 - [Install](#install)
 - [Quick Start](#quick-start)
 
+  - [Start a Minimal Server](#start-a-minimal-server)
   - [Parse a Request](#parse-a-request)
   - [Build a Response](#build-a-response)
-  - [Assemble a Minimal Server](#assemble-a-minimal-server)
 
 - [API Overview](#api-overview)
 - [Design Notes](#design-notes)
