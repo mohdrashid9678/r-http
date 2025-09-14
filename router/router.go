@@ -8,8 +8,6 @@ import (
 	"github.com/mohdrashid9678/rhttp/response"
 )
 
-// Handler is now defined directly in the router package.
-// This breaks the import cycle.
 type Handler func(*request.Request) (*response.Response, error)
 
 // node represents a single node in the radix tree.
@@ -21,7 +19,7 @@ type node struct {
 	isParam  bool
 }
 
-// Router uses a radix tree for high-performance routing.
+// Thread safe router type
 type Router struct {
 	trees map[string]*node
 	mu    sync.RWMutex
@@ -115,8 +113,6 @@ func (n *node) search(path string) (Handler, map[string]string) {
 	}
 
 	if len(currentNode.handlers) > 0 {
-		// This part assumes the method is implicitly known from the tree root,
-		// which is correct. We just need to find if any handler exists.
 		for _, handler := range currentNode.handlers {
 			return handler, params
 		}

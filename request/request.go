@@ -10,7 +10,7 @@ import (
 	"strings"
 )
 
-// Request now contains a streaming body and path parameters.
+// Request is the top level request struct
 type Request struct {
 	Method     string
 	Target     string
@@ -29,11 +29,11 @@ type bodyReader struct {
 
 func (br *bodyReader) Close() error {
 	// Closing the body reader should not close the underlying connection
-	// until the response is written. We can make this a no-op for now.
+	// until the response is written.
 	return nil
 }
 
-// Parse now constructs a streaming body reader instead of reading it all.
+// Parse parses the complete request
 func Parse(conn net.Conn) (*Request, error) {
 	reader := bufio.NewReader(conn)
 	req := &Request{

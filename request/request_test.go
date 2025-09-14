@@ -9,7 +9,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-// TestParse is a table-driven test that covers various valid and invalid request formats.
 func TestParse(t *testing.T) {
 	testCases := []struct {
 		name            string   // A descriptive name for the test case.

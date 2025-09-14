@@ -13,7 +13,7 @@ import (
 	"github.com/mohdrashid9678/rhttp/httperrors"
 )
 
-// Response can now be created from an io.Reader for streaming.
+// Response is the top level response type
 type Response struct {
 	StatusCode int
 	StatusText string
